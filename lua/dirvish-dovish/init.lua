@@ -1,7 +1,8 @@
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local utils = require('dirvido.utils')
+local utils = require('dirvish-dovish.utils')
+local api = vim.api
 
 local M = {}
 
@@ -17,27 +18,17 @@ local function moveCursorTo(target)
 	fn.search('\\V' .. fn.escape(target, '\\') .. '\\$')
 end
 
-local function getVisualSelection()
-	local line_start, column_start, line_end, column_end
-	if fn.mode() == "v" or fn.mode() == "V" then
-		line_start, column_start = unpack(vim.fn.getpos("v"), 2, 3)
-		line_end, column_end = unpack(vim.fn.getpos("."), 2, 3)
-	else
-		line_start, column_start = unpack(vim.fn.getpos("'<"), 2, 3)
-		line_end, column_end = unpack(vim.fn.getpos("'>"), 2, 3)
+local function getVisualSelectedLines()
+	local line_start = api.nvim_buf_get_mark(0, "<")[1]
+	local line_end = api.nvim_buf_get_mark(0, ">")[1]
+
+	if line_start > line_end then
+		line_start, line_end = line_end, line_start
 	end
 
-	if (vim.fn.line2byte(line_start) + column_start) > (vim.fn.line2byte(line_end) + column_end) then
-		line_start, column_start, line_end, column_end = line_end, column_end, line_start, column_start
-	end
+	--- Nvim API indexing is zero-based, end-exclusive
+	local lines = api.nvim_buf_get_lines(0, line_start - 1, line_end, false)
 
-	local lines = vim.fn.getline(line_start, line_end)
-	if #lines == 0 then
-		return ''
-	end
-
-	lines[#lines] = string.sub(lines[#lines], 1, column_end - 1)
-	lines[1] = string.sub(lines[1], column_start - 1)
 	return lines
 end
 
@@ -94,7 +85,7 @@ function M.rename()
 	end
 end
 
-function M.copyfile(file, newpath)
+local function copyfile(file, newpath)
 	local success, errname, errmsg = uv.fs_copyfile(file, newpath)
 	if not success then
 		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
@@ -105,7 +96,7 @@ function M.copyfile(file, newpath)
 end
 
 -- Copy dir recursively
-function M.copydir(dir, newpath)
+local function copydir(dir, newpath)
 	local handle = uv.fs_scandir(dir)
 	if not handle then
 		return
@@ -123,9 +114,9 @@ function M.copydir(dir, newpath)
 		end
 		local filepath = fs.joinpath(dir, name)
 		if type == "directory" then
-			M.copydir(filepath, fs.joinpath(newpath, name))
+			copydir(filepath, fs.joinpath(newpath, name))
 		else
-			M.copyfile(filepath, fs.joinpath(newpath, name))
+			copyfile(filepath, fs.joinpath(newpath, name))
 		end
 	end
 end
@@ -138,13 +129,17 @@ M.copy = function()
 	local new_dir = fn.expand("%")
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
-		local newpath = fs.joinpath(new_dir, fs.basename(target))
+		local newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, #target - 1)))
+		print('target', target)
+		print('new_dir', new_dir)
+		print('newpath', newpath)
 		if isDir then
-			M.copydir(target, newpath)
+			copydir(target, newpath)
 		else
-			M.copyfile(target, newpath)
+			copyfile(target, newpath)
 		end
 	end
+	reload()
 end
 
 M.move = function()
@@ -171,14 +166,11 @@ M.move = function()
 end
 
 M.vremove = function()
-	if fn.mode() ~= 'v' or fn.mode() ~= 'V' then
-		return
-	end
-	local lines = getVisualSelection()
+	local lines = getVisualSelectedLines()
 	if #lines == 0 then
 		return
 	end
-	local check = fn.confirm("Delete " .. #lines .. " files/directories", "&Yes\n&No", 2)
+	local check = fn.confirm("Delete " .. vim.inspect(lines), "&Yes\n&No", 2)
 	if check ~= 1 then
 		print("Cancelled")
 		return
@@ -186,12 +178,10 @@ M.vremove = function()
 	for _, line in ipairs(lines) do
 		utils.rm(line)
 	end
+	reload()
 end
 
 function M.nremove()
-	if fn.mode ~= 'n' then
-		return
-	end
 	local line = vim.trim(fn.getline('.'))
 	local check = fn.confirm("Delete " .. line, "&Yes\n&No", 2)
 	if check ~= 1 then
@@ -203,7 +193,7 @@ function M.nremove()
 end
 
 function M.setup(opts)
-	local default_opts = { del_all_keymap = false }
+	local default_opts = { disable_default_keymaps = false }
 	M.config = vim.tbl_extend("force", default_opts, opts or {})
 end
 

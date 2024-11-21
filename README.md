@@ -1,37 +1,80 @@
-# 🧰 vim-dirvish-dovish
+# Introduction
 
-> The file manipulation commands for [vim-dirvish][dirvish] that you've always wanted
+> The file manipulation commands for [vim-dirvish](https://github.com/justinmk/vim-dirvish) that you've always wanted
 
-## Installation & Requirements
+# Installation & Requirements
 
 You'll need:
-
+- Nvim 0.8.0 or greater
 - [dirvish.vim](https://github.com/justinmk/vim-dirvish)
 
 Then install with your favorite package manager:
 
+```lua
+-- lazy.nvim
+{
+    'brianhuster/dirvish-dovish.nvim',
+    dependencies = {'justinmk/vim-dirvish'}
+}
+```
+
 ```vim
+" Vim-Plug
 Plug 'brianhuster/dirvish-dovish.nvim'
 ```
 
-## Mappings
+# Mappings
 
-| Function                                | Default | Key                               |
-| --------------------------------------- | ------- | --------------------------------- |
-| Create file                             | `a`     | `<Plug>(dovish_create_file)`      |
-| Create directory                        | `A`     | `<Plug>(dovish_create_directory)` |
-| Delete under cursor                     | `<Del>` | `<Plug>(dovish_ndelete)`          |
-| Rename under cursor                     | `r`     | `<Plug>(dovish_rename)`           |
-| Yank under cursor (or visual selection) | `yy`    | `<Plug>(dovish_yank)`             |
-| Copy file to current directory          | `p`     | `<Plug>(dovish_copy)`             |
-| Move file to current directory          | `mv`    | `<Plug>(dovish_move)`             |
+| Function                                | Default | Key                                |Mode  |
+| --------------------------------------- | ------- | ---------------------------------- | ---- |
+| Create file                             | `f`     | `<Plug>(dovish_create_file)`      |Normal|
+| Create directory                        | `d`     | `<Plug>(dovish_create_directory)` |Normal|
+| Delete under cursor                     | `<Del>` | `<Plug>(dovish_nremove)`          |Normal|
+| Delete items in visual selection        | `<Del>` | `<Plug>(dovish_vremove)`          |Visual|
+| Rename under cursor                     | `r`     | `<Plug>(dovish_rename)`           |Normal|
+| Copy file to current directory          | `p`     | `<Plug>(dovish_copy)`             |Normal|
+| Move file to current directory          | `mv`    | `<Plug>(dovish_move)`             |Normal|
 
-You can unmap all of the maps above and set your own (mine are below). Add this to `ftplugin/dirvish.vim`:
+For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
 
+You can also use `y` in visual mode to select many files to copy or move.
 
+# Configuration
 
-## Credit
+You can remove the default mappings by adding the following to your `init.lua`:
 
-This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvish-dovish) that has been refactored for better cross-platform support out of the box.
+```lua
+require('dirvish-dovish').setup({
+   disable_default_keymaps = true
+})
+```
+
+or your `init.vim`:
+
+```vim
+v:lua.require'dirvish-dovish'.setup({
+   \ 'disable_default_keymaps' : v:true
+\ })
+```
+
+You can also use `nnoremap`, `vnoremap`, `vim.api.nvim_set_keymap`, `vim.keymap.set` to set your own mappings.
+
+For example, to set your own mappings in `init.lua`:
+
+```lua
+vim.keymap.set('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true, remap = true })
+-- or
+vim.api.nvim_set_keymap('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true })
+```
+
+or in `init.vim`:
+
+```vim
+nnoremap <buffer><silent> p <Plug>(dovish_copy)
+```
+
+# Credit
+
+This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvish-dovish) by Rogin Farrer that has been rewritten in Lua. It uses |luv| and |built-in| Vim commands and functions instead of shell commands for better cross-platform support out of the box.
 
 Big shout out to [Melandel](https://github.com/Melandel) for laying the [foundation](https://github.com/Melandel/desktop/blob/c323969e4bd48dda6dbceada3a7afe8bacdda0f5/setup/my_vimrc.vim#L976-L1147) for this plugin!
