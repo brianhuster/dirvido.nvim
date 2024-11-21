@@ -1,5 +1,8 @@
 local map = vim.keymap.set
-local hasmapto = vim.fn.hasmapto
+local hasmapto = function(...)
+	local check = vim.fn.hasmapto(...)
+	return check and check ~= 0
+end
 local dirvido = require('dirvido')
 
 map({ 'n' }, '<Plug>(dirvido_copy)', dirvido.copy, { buffer = true, silent = true })
