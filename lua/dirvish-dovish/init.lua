@@ -10,7 +10,7 @@ M.config = {}
 
 local sep = utils.sep
 
-local function reload()
+local function Dirvish()
 	vim.cmd.Dirvish()
 end
 
@@ -44,8 +44,9 @@ M.mkfile = function()
 	if #filename == 0 then
 		return
 	end
-	vim.cmd.edit(filename)
-	reload()
+	vim.cmd.edit("%" .. filename)
+	vim.cmd.write()
+	Dirvish()
 end
 
 M.mkdir = function()
@@ -59,7 +60,7 @@ M.mkdir = function()
 	if not success then
 		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 	else
-		reload()
+		Dirvish()
 		moveCursorTo(dirname .. sep)
 	end
 end
@@ -77,7 +78,7 @@ function M.rename()
 	if not success then
 		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 	else
-		reload()
+		Dirvish()
 		if isDir then
 			moveCursorTo(newname .. sep)
 		else
@@ -91,7 +92,7 @@ local function copyfile(file, newpath)
 	if not success then
 		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 	else
-		reload()
+		Dirvish()
 		moveCursorTo(fs.basename(newpath))
 	end
 end
@@ -140,7 +141,7 @@ M.copy = function()
 			copyfile(target, newpath)
 		end
 	end
-	reload()
+	Dirvish()
 end
 
 M.move = function()
@@ -156,7 +157,7 @@ M.move = function()
 		if not success then
 			vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 		else
-			reload()
+			Dirvish()
 			if isDir then
 				moveCursorTo(fs.basename(newpath) .. sep)
 			else
@@ -179,7 +180,7 @@ M.vremove = function()
 	for _, line in ipairs(lines) do
 		utils.rm(line)
 	end
-	reload()
+	Dirvish()
 end
 
 function M.nremove()
@@ -190,7 +191,7 @@ function M.nremove()
 		return
 	end
 	utils.rm(line)
-	reload()
+	Dirvish()
 end
 
 function M.setup(opts)
