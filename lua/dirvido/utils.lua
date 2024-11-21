@@ -1,5 +1,6 @@
 local M = {}
 
+local fs = vim.fs
 local fn = vim.fn
 
 M.sep = fn.exists('+shellslash') and not vim.o.shellslash and '\\' or '/'
@@ -7,9 +8,9 @@ M.sep = fn.exists('+shellslash') and not vim.o.shellslash and '\\' or '/'
 function M.rm(path)
 	local isDir = path:sub(-1) == "/"
 	if isDir then
-		fn.delete(path, "rf")
+		fs.rm(path, { recursive = true })
 	else
-		fn.delete(path)
+		fs.rm(path)
 	end
 end
 

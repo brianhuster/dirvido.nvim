@@ -1,7 +1,7 @@
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local utils = require('dirvish-dovish.utils')
+local utils = require('dirvido.utils')
 
 local M = {}
 
