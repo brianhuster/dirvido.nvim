@@ -45,6 +45,7 @@ M.mkfile = function()
 		return
 	end
 	vim.cmd.edit(filename)
+	reload()
 end
 
 M.mkdir = function()
