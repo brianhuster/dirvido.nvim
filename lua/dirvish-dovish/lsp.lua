@@ -1,11 +1,4 @@
-local M = {
-	willRenameFiles = nil,
-	didRenameFiles = nil,
-	willCreateFiles = nil,
-	didCreateFiles = nil,
-	willDeleteFiles = nil,
-	didDeleteFiles = nil,
-}
+local M = {}
 
 local function send(method, params)
 	local clients = vim.lsp.get_clients()
@@ -49,38 +42,28 @@ local send_file = function(method, path)
 	send(method, params)
 end
 
--- function M.willRenameFiles(old_path, new_path)
--- 	send_rename("workspace/willRenameFiles", old_path, new_path)
--- end
---
--- function M.didRenameFiles(old_path, new_path)
--- 	send_rename("workspace/didRenameFiles", old_path, new_path)
--- end
---
--- function M.willCreateFiles(path)
--- 	send_file("workspace/willCreateFiles", path)
--- end
---
--- function M.didCreateFiles(path)
--- 	send_file("workspace/didCreateFiles", path)
--- end
---
--- function M.willDeleteFiles(path)
--- 	send_file("workspace/willDeleteFiles", path)
--- end
---
--- function M.didDeleteFiles(path)
--- 	send_file("workspace/didDeleteFiles", path)
--- end
+function M.willRenameFiles(old_path, new_path)
+	send_rename("workspace/willRenameFiles", old_path, new_path)
+end
 
-for method, _ in pairs(M) do
-	M[method] = function(...)
-		if method:match('Rename') then
-			send_rename('workspace/' .. method, ...)
-		else
-			send_file(method, ...)
-		end
-	end
+function M.didRenameFiles(old_path, new_path)
+	send_rename("workspace/didRenameFiles", old_path, new_path)
+end
+
+function M.willCreateFiles(path)
+	send_file("workspace/willCreateFiles", path)
+end
+
+function M.didCreateFiles(path)
+	send_file("workspace/didCreateFiles", path)
+end
+
+function M.willDeleteFiles(path)
+	send_file("workspace/willDeleteFiles", path)
+end
+
+function M.didDeleteFiles(path)
+	send_file("workspace/didDeleteFiles", path)
 end
 
 return M
