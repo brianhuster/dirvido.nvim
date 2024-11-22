@@ -61,7 +61,7 @@ v:lua.require'dirvish-dovish'.setup({
 \ })
 ```
 
-To configure this plugin, create file `dirvish.lua` or `dirvish.vim` in your `ftplugin` directory of your config
+To set your keymaps, create file `dirvish.lua` or `dirvish.vim` in your `ftplugin` directory of your config
 
 ```vim
 :call chdir(stdpath('config'))
