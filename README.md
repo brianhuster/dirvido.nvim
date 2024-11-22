@@ -11,7 +11,7 @@
 # Installation & Requirements
 
 You'll need:
-- Nvim 0.10 or later
+- Nvim 0.8 or later
 - [dirvish.vim](https://github.com/justinmk/vim-dirvish)
 
 Then install with your favorite package manager:
@@ -48,7 +48,7 @@ You can also use `y` in `visual line` mode to select many files to copy or move.
 
 # Configuration
 
-You can remove the default mappings by adding the following to your `init.lua`:
+You can remove the default mappings by adding the following to your <code class='language-lua'>vim.fn.stdpath("config") .. "/ftplugin/dirvish.lua"</code> or <code class='language-vim'>stdpath('config').'/ftplugin/dirvish.vim'</code>:
 
 ```lua
 require('dirvish-dovish').setup({

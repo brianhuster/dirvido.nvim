@@ -1,7 +1,12 @@
 local M = {}
 
+local lsp = vim.lsp
+if not lsp.get_clients then
+	lsp.get_clients = lsp.get_active_clients
+end
+
 local function send(method, params)
-	local clients = vim.lsp.get_clients()
+	local clients = lsp.get_clients()
 	if #clients == 0 then
 		return
 	end
@@ -10,7 +15,7 @@ local function send(method, params)
 		if client.supports_method(method) then
 			pcall(client.request, method, params, function(err, result)
 				if result and result.changes then
-					vim.lsp.util.apply_workspace_edit(result)
+					lsp.util.apply_workspace_edit(result)
 				end
 			end)
 		end
