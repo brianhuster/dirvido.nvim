@@ -1,9 +1,8 @@
+require('dirvish-dovish.compat')
+
 local M = {}
 
 local lsp = vim.lsp
-if not lsp.get_clients then
-	lsp.get_clients = lsp.get_active_clients
-end
 
 local function send(method, params)
 	local clients = lsp.get_clients()
