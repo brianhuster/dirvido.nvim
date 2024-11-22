@@ -4,10 +4,10 @@
 Table of Contents                           *dirvish-dovish-table-of-contents*
 
 1. Introduction                                  |dirvish-dovish-introduction|
-2. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
-3. Mappings                                          |dirvish-dovish-mappings|
-4. Configuration                                |dirvish-dovish-configuration|
-5. TODO                                                  |dirvish-dovish-todo|
+2. Features                                          |dirvish-dovish-features|
+3. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
+4. Mappings                                          |dirvish-dovish-mappings|
+5. Configuration                                |dirvish-dovish-configuration|
 6. Credit                                              |dirvish-dovish-credit|
 
 ==============================================================================
@@ -18,7 +18,16 @@ Table of Contents                           *dirvish-dovish-table-of-contents*
   <https://github.com/justinmk/vim-dirvish> that you’ve always wanted
 
 ==============================================================================
-2. Installation & Requirements    *dirvish-dovish-installation-&-requirements*
+2. Features                                          *dirvish-dovish-features*
+
+- Supports most file operations: create, delete, rename, copy, move
+- Cross-platform support thanks to luv <https://github.com/luvit/luv>
+- Easy to memorize |dirvish-dovish-mappings|
+- Integration with LSP for renaming files,…
+
+
+==============================================================================
+3. Installation & Requirements    *dirvish-dovish-installation-&-requirements*
 
 You’ll need: - Nvim 0.10 or later - dirvish.vim
 <https://github.com/justinmk/vim-dirvish>
@@ -41,7 +50,7 @@ Then install with your favorite package manager:
 
 
 ==============================================================================
-3. Mappings                                          *dirvish-dovish-mappings*
+4. Mappings                                          *dirvish-dovish-mappings*
 
   -----------------------------------------------------------------------------------------------
   Function                 Default   Key                               Mode     Tip to remember
@@ -75,7 +84,7 @@ file path)
 
 
 ==============================================================================
-4. Configuration                                *dirvish-dovish-configuration*
+5. Configuration                                *dirvish-dovish-configuration*
 
 You can remove the default mappings by adding the following to your `init.lua`:
 
@@ -109,12 +118,6 @@ or in `init.vim`:
 >vim
     nnoremap <buffer><silent> p <Plug>(dovish_copy)
 <
-
-
-==============================================================================
-5. TODO                                                  *dirvish-dovish-todo*
-
-- ☐ Integration with LSP for renaming files
 
 
 ==============================================================================
