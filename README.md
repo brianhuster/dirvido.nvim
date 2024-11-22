@@ -48,25 +48,30 @@ You can also use `y` in `visual line` mode to select many files to copy or move.
 
 # Configuration
 
-You can remove the default mappings by adding the following to your <code class='language-lua'>vim.fn.stdpath("config") .. "/ftplugin/dirvish.lua"</code> or <code class='language-vim'>stdpath('config').'/ftplugin/dirvish.vim'</code>:
-
 ```lua
+-- init.lua
 require('dirvish-dovish').setup({
-   disable_default_keymaps = true
+   disable_default_keymaps = false -- Set to true to disable default keymaps
 })
 ```
+```vim
+" init.vim
+v:lua.require'dirvish-dovish'.setup({
+   \ 'disable_default_keymaps' : v:false " Set to true to disable default keymaps
+\ })
+```
 
-or your `init.vim`:
+To configure this plugin, create file `dirvish.lua` or `dirvish.vim` in your `ftplugin` directory of your config
 
 ```vim
-v:lua.require'dirvish-dovish'.setup({
-   \ 'disable_default_keymaps' : v:true
-\ })
+:call chdir(stdpath('config'))
+:call mkdir('ftplugin')
+:e ftplugin/dirvish.lua " or ftplugin/dirvish.vim
 ```
 
 You can also use `nnoremap`, `vnoremap`, `vim.api.nvim_set_keymap`, `vim.keymap.set` to set your own mappings.
 
-For example, to set your own mappings in `init.lua`:
+For example, to set your own mappings in `dirvish.lua`:
 
 ```lua
 vim.keymap.set('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true, remap = true })
@@ -74,7 +79,7 @@ vim.keymap.set('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true, 
 vim.api.nvim_set_keymap('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true })
 ```
 
-or in `init.vim`:
+or in `dirvish.vim`:
 
 ```vim
 nnoremap <buffer><silent> p <Plug>(dovish_copy)
