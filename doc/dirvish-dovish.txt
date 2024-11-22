@@ -100,7 +100,7 @@ file path)
     \ })
 <
 
-To configure this plugin, create file `dirvish.lua` or `dirvish.vim` in your
+To set your keymaps, create file `dirvish.lua` or `dirvish.vim` in your
 `ftplugin` directory of your config
 
 >vim
