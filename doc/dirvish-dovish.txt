@@ -115,7 +115,7 @@ or in `init.vim`:
 ==============================================================================
 5. TODO                                                  *dirvish-dovish-todo*
 
-- [] Integration with LSP for renaming files
+- ☐ Integration with LSP for renaming files
 
 
 ==============================================================================
