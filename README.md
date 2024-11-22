@@ -5,7 +5,7 @@
 # Installation & Requirements
 
 You'll need:
-- Nvim 0.8.0 or greater
+- Nvim 0.10 or later
 - [dirvish.vim](https://github.com/justinmk/vim-dirvish)
 
 Then install with your favorite package manager:

@@ -15,7 +15,7 @@ local function send_rename(method, old_path, new_path)
 		},
 	}
 
-	local clients = vim.lsp.get_active_clients()
+	local clients = vim.lsp.get_clients()
 	if #clients == 0 then
 		return
 	end
