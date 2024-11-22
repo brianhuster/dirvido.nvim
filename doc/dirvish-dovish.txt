@@ -7,7 +7,8 @@ Table of Contents                           *dirvish-dovish-table-of-contents*
 2. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
 3. Mappings                                          |dirvish-dovish-mappings|
 4. Configuration                                |dirvish-dovish-configuration|
-5. Credit                                              |dirvish-dovish-credit|
+5. TODO                                                  |dirvish-dovish-todo|
+6. Credit                                              |dirvish-dovish-credit|
 
 ==============================================================================
 1. Introduction                                  *dirvish-dovish-introduction*
@@ -112,7 +113,13 @@ or in `init.vim`:
 
 
 ==============================================================================
-5. Credit                                              *dirvish-dovish-credit*
+5. TODO                                                  *dirvish-dovish-todo*
+
+- [] Integration with LSP for renaming files
+
+
+==============================================================================
+6. Credit                                              *dirvish-dovish-credit*
 
 This is a fork of vim-dirvish-dovish
 <https://github.com/roginfarrer/vim-dirvish-dovish> by Rogin Farrer that has
