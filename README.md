@@ -38,7 +38,7 @@ Plug 'brianhuster/dirvish-dovish.nvim'
 
 For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
 
-You can also use `y` in visual mode to select many files to copy or move.
+You can also use `y` in `visual line` mode to select many files to copy or move. (Note: `visual line` mode is recommended so that you can yank the full file path)
 
 # Configuration
 

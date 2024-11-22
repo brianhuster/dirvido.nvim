@@ -13,7 +13,7 @@ map({ 'x' }, '<Plug>(dovish_vremove)', dirvido.vremove, { buffer = true, silent 
 map({ 'n' }, '<Plug>(dovish_mkfile)', dirvido.mkfile, { buffer = true, silent = true })
 map({ 'n' }, '<Plug>(dovish_mkdir)', dirvido.mkdir, { buffer = true, silent = true })
 
-if not dirvido.config.del_all_keymap then
+if not dirvido.config.disable_all_keymaps then
 	if not hasmapto('<Plug>(dovish_copy)', 'n') then
 		map({ 'n' }, 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true })
 	end
