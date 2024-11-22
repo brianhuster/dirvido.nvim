@@ -2,6 +2,7 @@ local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
 local utils = require('dirvish-dovish.operators')
+local lsp = require('dirvish-dovish.lsp')
 local api = vim.api
 
 local M = {}
@@ -44,9 +45,12 @@ M.mkfile = function()
 	if #filename == 0 then
 		return
 	end
+	lsp.willCreateFiles(filename)
 	vim.cmd.edit("%" .. filename)
 	vim.cmd.write()
 	Dirvish()
+	moveCursorTo(fs.joinpath(fn.expand("%"), filename))
+	lsp.didCreateFiles(filename)
 end
 
 M.mkdir = function()
@@ -55,6 +59,7 @@ M.mkdir = function()
 	if #dirname == 0 then
 		return
 	end
+	lsp.willCreateFiles(dirname)
 	local dirpath = fs.joinpath(fn.expand("%"), dirname)
 	local success, errname, errmsg = uv.fs_mkdir(dirpath, 493)
 	if not success then
@@ -62,6 +67,7 @@ M.mkdir = function()
 	else
 		Dirvish()
 		moveCursorTo(dirname .. sep)
+		lsp.didCreateFiles(dirpath)
 	end
 end
 

@@ -60,7 +60,7 @@ end
 function M.mv(oldPath, newPath)
 	lsp.willRenameFiles(oldPath, newPath)
 	local success, errname, errmsg = uv.fs_rename(oldPath, newPath)
-	lsp.didRenameFile(oldPath, newPath)
+	lsp.didRenameFiles(oldPath, newPath)
 	return success, errname, errmsg
 end
 
