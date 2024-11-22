@@ -2,6 +2,12 @@
 
 > The file manipulation commands for [vim-dirvish](https://github.com/justinmk/vim-dirvish) that you've always wanted
 
+# Features
+- Supports most file operations: create, delete, rename, copy, move
+- Cross-platform support thanks to [luv](https://github.com/luvit/luv)
+- Easy to memorize [mappings](#mappings) 
+- Integration with LSP for renaming files,...
+
 # Installation & Requirements
 
 You'll need:
@@ -73,9 +79,6 @@ or in `init.vim`:
 ```vim
 nnoremap <buffer><silent> p <Plug>(dovish_copy)
 ```
-
-# TODO
-- [ ] Integration with LSP for renaming files
 
 # Credit
 

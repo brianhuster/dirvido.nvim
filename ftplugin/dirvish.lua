@@ -1,5 +1,5 @@
-if vim.fn.has('nvim-0.8') == 0 then
-	vim.notify('dirvish-dovish.nvim only supports Nvim 0.8 and later', vim.log.levels.ERROR)
+if vim.fn.has('nvim-0.10') == 0 then
+	vim.notify('dirvish-dovish.nvim only supports Nvim 0.10 and later', vim.log.levels.ERROR)
 	return
 end
 
