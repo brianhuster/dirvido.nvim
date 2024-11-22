@@ -17,24 +17,18 @@ local function send_rename(method, old_path, new_path)
 
 	local clients = vim.lsp.get_active_clients()
 	if #clients == 0 then
-		vim.notify("No active LSP clients to handle WillRename.", vim.log.levels.ERROR)
 		return
 	end
 
 	for _, client in ipairs(clients) do
 		if client.supports_method(method) then
-			client.request(method, params, function(err, result)
+			pcall(client.request, method, params, function(err, result)
 				if err then
 					vim.notify(method .. " failed: " .. err.message, vim.log.levels.ERROR)
 					return
 				end
 
 				if result and result.changes then
-					local confirm = fn.confirm("Do you want to update paths?", '&Yes\n&No')
-					if confirm ~= 1 then
-						print('Cancelled')
-						return
-					end
 					vim.lsp.util.apply_workspace_edit(result)
 				end
 			end)
