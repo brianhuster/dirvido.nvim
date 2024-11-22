@@ -21,7 +21,7 @@ local function send_rename(method, old_path, new_path)
 		return
 	end
 
-	for _, client in clients do
+	for _, client in ipairs(clients) do
 		if not client.supports_method(method) then
 			return
 		end
