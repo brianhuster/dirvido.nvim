@@ -30,9 +30,9 @@ if not dirvido.config.disable_all_keymaps then
 		map({ 'x' }, '<Del>', '<Plug>(dovish_vremove)', { buffer = true, silent = true })
 	end
 	if not hasmapto('<Plug>(dovish_mkfile)', 'n') then
-		map({ 'n' }, 'f', '<Plug>(dovish_mkfile)', { buffer = true, silent = true })
+		map({ 'n' }, 'mf', '<Plug>(dovish_mkfile)', { buffer = true, silent = true })
 	end
 	if not hasmapto('<Plug>(dovish_mkdir)', 'n') then
-		map({ 'n' }, 'd', '<Plug>(dovish_mkdir)', { buffer = true, silent = true })
+		map({ 'n' }, 'md', '<Plug>(dovish_mkdir)', { buffer = true, silent = true })
 	end
 end
