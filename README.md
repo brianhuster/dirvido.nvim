@@ -20,6 +20,7 @@ Then install with your favorite package manager:
 
 ```vim
 " Vim-Plug
+Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-dovish.nvim'
 ```
 
