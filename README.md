@@ -75,7 +75,7 @@ nnoremap <buffer><silent> p <Plug>(dovish_copy)
 ```
 
 # TODO
-- [] Integration with LSP for renaming files
+- [ ] Integration with LSP for renaming files
 
 # Credit
 
