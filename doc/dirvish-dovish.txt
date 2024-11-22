@@ -46,10 +46,10 @@ Then install with your favorite package manager:
   -----------------------------------------------------------------------------------------------
   Function                 Default   Key                               Mode     Tip to remember
   ------------------------ --------- --------------------------------- -------- -----------------
-  Create file              mf        <Plug>(dovish_create_file)        Normal   Stand for “make
+  Create file              mf        <Plug>(dovish_create_file)        Normal   mf for “make
                                                                                 file”
 
-  Create directory         md        <Plug>(dovish_create_directory)   Normal   Stand for “make
+  Create directory         md        <Plug>(dovish_create_directory)   Normal   md for “make
                                                                                 directory”
 
   Delete under cursor      <Del>     <Plug>(dovish_nremove)            Normal   Just delete key
@@ -57,13 +57,12 @@ Then install with your favorite package manager:
   Delete items in visual   <Del>     <Plug>(dovish_vremove)            Visual   Just delete key
   selection                                                                     
 
-  Rename under cursor      r         <Plug>(dovish_rename)             Normal   Stand for
-                                                                                “rename”
+  Rename under cursor      r         <Plug>(dovish_rename)             Normal   r for “rename”
 
-  Copy file to current     p         <Plug>(dovish_copy)               Normal   Same as normal p
-  directory                                                                     for “put”
+  Copy file to current     cp        <Plug>(dovish_copy)               Normal   cp for “copy”
+  directory                                                                     
 
-  Move file to current     mv        <Plug>(dovish_move)               Normal   Stand for “move”
+  Move file to current     mv        <Plug>(dovish_move)               Normal   mv for “move”
   directory                                                                     
   -----------------------------------------------------------------------------------------------
 For example, you can use `yy` to yank a file, then move to a new directory and
