@@ -26,15 +26,15 @@ Plug 'brianhuster/dirvish-dovish.nvim'
 
 # Mappings
 
-| Function                                | Default | Key                                |Mode  |
-| --------------------------------------- | ------- | ---------------------------------- | ---- |
-| Create file                             | `f`     | `<Plug>(dovish_create_file)`      |Normal|
-| Create directory                        | `d`     | `<Plug>(dovish_create_directory)` |Normal|
-| Delete under cursor                     | `<Del>` | `<Plug>(dovish_nremove)`          |Normal|
-| Delete items in visual selection        | `<Del>` | `<Plug>(dovish_vremove)`          |Visual|
-| Rename under cursor                     | `r`     | `<Plug>(dovish_rename)`           |Normal|
-| Copy file to current directory          | `p`     | `<Plug>(dovish_copy)`             |Normal|
-| Move file to current directory          | `mv`    | `<Plug>(dovish_move)`             |Normal|
+| Function                                | Default | Key                               |Mode  |Tip to remember             |
+| --------------------------------------- | ------- | ----------------------------------| ---- |----------------------------|
+| Create file                             | `mf`    | `<Plug>(dovish_create_file)`      |Normal|Stand for "make file"       |
+| Create directory                        | `md`    | `<Plug>(dovish_create_directory)` |Normal|Stand for "make directory"  |
+| Delete under cursor                     | `<Del>` | `<Plug>(dovish_nremove)`          |Normal|Just delete key             |
+| Delete items in visual selection        | `<Del>` | `<Plug>(dovish_vremove)`          |Visual|Just delete key             |
+| Rename under cursor                     | `r`     | `<Plug>(dovish_rename)`           |Normal|Stand for "rename"          |
+| Copy file to current directory          | `p`     | `<Plug>(dovish_copy)`             |Normal|Same as normal `p` for "put"|
+| Move file to current directory          | `mv`    | `<Plug>(dovish_move)`             |Normal|Stand for "move"            |
 
 For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
 
