@@ -1,3 +1,8 @@
+if vim.fn.has('nvim-0.8') == 0 then
+	vim.notify('dirvish-dovish.nvim only supports Nvim 0.8 and later', vim.log.levels.ERROR)
+	return
+end
+
 local map = vim.keymap.set
 local hasmapto = function(...)
 	local check = vim.fn.hasmapto(...)

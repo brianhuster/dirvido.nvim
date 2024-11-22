@@ -74,7 +74,7 @@ function M.rename()
 		return
 	end
 	local newpath = fs.joinpath(fn.expand('%'), newname)
-	local success, errname, errmsg = uv.fs_rename(target, newpath)
+	local success, errname, errmsg = utils.mv(target, newpath)
 	if not success then
 		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 	else
@@ -87,61 +87,25 @@ function M.rename()
 	end
 end
 
-local function copyfile(file, newpath)
-	local success, errname, errmsg = uv.fs_copyfile(file, newpath)
-	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
-	else
-		Dirvish()
-		moveCursorTo(fs.basename(newpath))
-	end
-end
-
--- Copy dir recursively
-local function copydir(dir, newpath)
-	local handle = uv.fs_scandir(dir)
-	if not handle then
-		return
-	end
-	local success, errname, errmsg = uv.fs_mkdir(newpath, 493)
-	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
-		return
-	end
-
-	while true do
-		local name, type = uv.fs_scandir_next(handle)
-		if not name then
-			break
-		end
-		local filepath = fs.joinpath(dir, name)
-		if type == "directory" then
-			copydir(filepath, fs.joinpath(newpath, name))
-		else
-			copyfile(filepath, fs.joinpath(newpath, name))
-		end
-	end
-end
-
 M.copy = function()
 	local targets = get_register()
 	if #targets == 0 then
 		return
 	end
 	local new_dir = fn.expand("%")
+	local newpath
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
-		local newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, #target - 1)))
-		print('target', target)
-		print('new_dir', new_dir)
-		print('newpath', newpath)
 		if isDir then
-			copydir(target, newpath)
+			newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, #target - 1)))
+			utils.copydir(target, newpath)
 		else
-			copyfile(target, newpath)
+			newpath = fs.joinpath(new_dir, fs.basename(target))
+			utils.copyfile(target, newpath)
 		end
 	end
 	Dirvish()
+	moveCursorTo(newpath)
 end
 
 M.move = function()
@@ -153,7 +117,7 @@ M.move = function()
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
 		local newpath = fs.joinpath(new_dir, fs.basename(target))
-		local success, errname, errmsg = uv.fs_rename(target, newpath)
+		local success, errname, errmsg = utils.mv(target, newpath)
 		if not success then
 			vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
 		else
