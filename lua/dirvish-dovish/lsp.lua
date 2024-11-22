@@ -23,11 +23,6 @@ local function send_rename(method, old_path, new_path)
 	for _, client in ipairs(clients) do
 		if client.supports_method(method) then
 			pcall(client.request, method, params, function(err, result)
-				if err then
-					vim.notify(method .. " failed: " .. err.message, vim.log.levels.ERROR)
-					return
-				end
-
 				if result and result.changes then
 					vim.lsp.util.apply_workspace_edit(result)
 				end
