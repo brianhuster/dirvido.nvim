@@ -29,7 +29,7 @@ Table of Contents                           *dirvish-dovish-table-of-contents*
 ==============================================================================
 3. Installation & Requirements    *dirvish-dovish-installation-&-requirements*
 
-You’ll need: - Nvim 0.10 or later - dirvish.vim
+You’ll need: - Nvim 0.8 or later - dirvish.vim
 <https://github.com/justinmk/vim-dirvish>
 
 Then install with your favorite package manager:
@@ -86,7 +86,9 @@ file path)
 ==============================================================================
 5. Configuration                                *dirvish-dovish-configuration*
 
-You can remove the default mappings by adding the following to your `init.lua`:
+You can remove the default mappings by adding the following to your
+vim.fn.stdpath("config") .. "/ftplugin/dirvish.lua" or
+stdpath('config').’/ftplugin/dirvish.vim’:
 
 >lua
     require('dirvish-dovish').setup({
