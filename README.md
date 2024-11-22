@@ -74,6 +74,9 @@ or in `init.vim`:
 nnoremap <buffer><silent> p <Plug>(dovish_copy)
 ```
 
+# TODO
+- [] Integration with LSP for renaming files
+
 # Credit
 
 This is a fork of [vim-dirvish-dovish](https://github.com/roginfarrer/vim-dirvish-dovish) by Rogin Farrer that has been rewritten in Lua. It uses |luv| and |built-in| Vim commands and functions instead of shell commands for better cross-platform support out of the box.
