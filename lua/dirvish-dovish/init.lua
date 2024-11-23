@@ -4,16 +4,22 @@ local uv = vim.uv or vim.loop
 local utils = require('dirvish-dovish.operators')
 local lsp = require('dirvish-dovish.lsp')
 local api = vim.api
+local Dirvish = vim.cmd.Dirvish
 
 local M = {}
 
-M.config = {}
+M.config = {
+	keymaps = {
+		make_file = 'mf',
+		make_dir = 'md',
+		copy = 'cp',
+		move = 'mv',
+		rename = 'r',
+		remove = '<Del>',
+	},
+}
 
 local sep = utils.sep
-
-local function Dirvish()
-	vim.cmd.Dirvish()
-end
 
 local function moveCursorTo(target)
 	fn.search('\\V' .. fn.escape(target, '\\') .. '\\$')
@@ -165,8 +171,7 @@ function M.nremove()
 end
 
 function M.setup(opts)
-	local default_opts = { disable_default_keymaps = false }
-	M.config = vim.tbl_extend("force", default_opts, opts or {})
+	M.config = vim.tbl_deep_extend("force", M.config, opts or {})
 end
 
 return M

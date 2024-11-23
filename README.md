@@ -30,17 +30,17 @@ Plug 'justinmk/vim-dirvish'
 Plug 'brianhuster/dirvish-dovish.nvim'
 ```
 
-# Mappings
+# Default mappings
 
-| Function                                | Default | Key                               |Mode  |Tip to remember             |
-| --------------------------------------- | ------- | ----------------------------------| ---- |----------------------------|
-| Create file                             | `mf`    | `<Plug>(dovish_create_file)`      |Normal|`mf` for "make file"        |
-| Create directory                        | `md`    | `<Plug>(dovish_create_directory)` |Normal|`md` for "make directory"   |
-| Delete under cursor                     | `<Del>` | `<Plug>(dovish_nremove)`          |Normal|Just delete key             |
-| Delete items in visual selection        | `<Del>` | `<Plug>(dovish_vremove)`          |Visual|Just delete key             |
-| Rename under cursor                     | `r`     | `<Plug>(dovish_rename)`           |Normal|`r` for "rename"            |
-| Copy file to current directory          | `cp`    | `<Plug>(dovish_copy)`             |Normal|`cp` for "copy"             |
-| Move file to current directory          | `mv`    | `<Plug>(dovish_move)`             |Normal|`mv` for "move"             |
+| Function                                | Default | Mode  |Tip to remember             |
+| --------------------------------------- | ------- | ----  |----------------------------|
+| Create file                             | `mf`    | Normal|`mf` for "make file"        |
+| Create directory                        | `md`    | Normal|`md` for "make directory"   |
+| Delete under cursor                     | `<Del>` | Normal|Just delete key             |
+| Delete items in visual selection        | `<Del>` | Visual|Just delete key             |
+| Rename under cursor                     | `r`     | Normal|`r` for "rename"            |
+| Copy file to current directory          | `cp`    | Normal|`cp` for "copy"             |
+| Move file to current directory          | `mv`    | Normal|`mv` for "move"             |
 
 For example, you can use `yy` to yank a file, then move to a new directory and use `p` to paste the file there. Or to move a file, you use `yy` to yank the file, move to a new directory and use `mv` to move the file there.
 
@@ -48,42 +48,37 @@ You can also use `y` in `visual line` mode to select many files to copy or move.
 
 # Configuration
 
+You can configure the keymaps to your liking. Here's an example:
+
+## In Lua
+
 ```lua
--- init.lua
-require('dirvish-dovish').setup({
-   disable_default_keymaps = false -- Set to true to disable default keymaps
+require('dirvish-dovish').setup(){
+	keymaps = {
+		make_file = 'mf',
+		make_dir = 'md',
+		copy = 'cp',
+		move = 'mv',
+		rename = 'r',
+		remove = '<Del>',
+	},
 })
 ```
+## In Vimscript
+
 ```vim
-" init.vim
-v:lua.require'dirvish-dovish'.setup({
-   \ 'disable_default_keymaps' : v:false " Set to true to disable default keymaps
+v:lua.require'dirvish-dovish'.setup(#{
+    \ keymaps: {
+    \ make_file: 'mf',
+    \ make_dir: 'md',
+    \ copy: 'cp',
+    \ move: 'mv',
+    \ move: 'r',
+    \ remove: '<Del>',
+    \ },
 \ })
 ```
-
-To set your keymaps, create file `dirvish.lua` or `dirvish.vim` in your `ftplugin` directory of your config
-
-```vim
-:call chdir(stdpath('config'))
-:call mkdir('ftplugin')
-:e ftplugin/dirvish.lua " or ftplugin/dirvish.vim
-```
-
-You can also use `nnoremap`, `vnoremap`, `vim.api.nvim_set_keymap`, `vim.keymap.set` to set your own mappings.
-
-For example, to set your own mappings in `dirvish.lua`:
-
-```lua
-vim.keymap.set('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true, remap = true })
--- or
-vim.api.nvim_set_keymap('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true })
-```
-
-or in `dirvish.vim`:
-
-```vim
-nnoremap <buffer><silent> p <Plug>(dovish_copy)
-```
+See `:h v:lua-call` for more information on calling Lua functions from legacy Vimscript.
 
 # Credit
 
