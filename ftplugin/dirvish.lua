@@ -1,10 +1,10 @@
 if vim.fn.has('nvim-0.8') == 0 then
-	vim.notify('dirvish-dovish.nvim only supports Nvim 0.8 and later', vim.log.levels.ERROR)
+	vim.notify('dirvish-do.nvim only supports Nvim 0.8 and later', vim.log.levels.ERROR)
 	return
 end
 
 local map = vim.keymap.set
-local dirvido = require('dirvish-dovish')
+local dirvido = require('dirvish-do')
 local keymaps = dirvido.config.keymaps
 
 map({ 'n' }, keymaps.copy, dirvido.copy, { buffer = true, silent = true })

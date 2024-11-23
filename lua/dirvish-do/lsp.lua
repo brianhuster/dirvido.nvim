@@ -1,4 +1,4 @@
-require('dirvish-dovish.compat')
+require('dirvish-do.compat')
 
 local M = {}
 

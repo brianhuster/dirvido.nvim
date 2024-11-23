@@ -1,8 +1,8 @@
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local utils = require('dirvish-dovish.operators')
-local lsp = require('dirvish-dovish.lsp')
+local utils = require('dirvish-do.operators')
+local lsp = require('dirvish-do.lsp')
 local api = vim.api
 local Dirvish = vim.cmd.Dirvish
 
@@ -69,7 +69,9 @@ M.mkdir = function()
 	local dirpath = fs.joinpath(fn.expand("%"), dirname)
 	local success, errname, errmsg = uv.fs_mkdir(dirpath, 493)
 	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
+		vim.print(
+			("%s: %s"):format(errname, errmsg),
+			vim.log.levels.ERROR)
 	else
 		Dirvish()
 		moveCursorTo(dirname .. sep)
@@ -80,7 +82,7 @@ end
 function M.rename()
 	local target = vim.trim(fn.getline('.'))
 	local isDir = target:sub(-1) == sep
-	local filename = fs.basename(target)
+	local filename = fs.basename(isDir and target:sub(1, -2) or target)
 	local newname = fn.input('Enter new name: ', filename)
 	if not newname or #newname == 0 or vim.trim(newname) == target then
 		return
@@ -88,7 +90,9 @@ function M.rename()
 	local newpath = fs.joinpath(fn.expand('%'), newname)
 	local success, errname, errmsg = utils.mv(target, newpath)
 	if not success then
-		vim.print(string.format("%s: %s", errname, errmsg), vim.log.levels.ERROR)
+		vim.print(
+			("%s: %s"):format(errname, errmsg),
+			vim.log.levels.ERROR)
 	else
 		Dirvish()
 		if isDir then
@@ -109,7 +113,7 @@ M.copy = function()
 	for _, target in ipairs(targets) do
 		local isDir = target:sub(-1) == sep
 		if isDir then
-			newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, #target - 1)))
+			newpath = fs.joinpath(new_dir, fs.basename(target:sub(1, -2)))
 			utils.copydir(target, newpath)
 		else
 			newpath = fs.joinpath(new_dir, fs.basename(target))

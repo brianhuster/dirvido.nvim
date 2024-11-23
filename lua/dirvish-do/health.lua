@@ -17,7 +17,7 @@ function M.check()
 	end
 
 	health.start('Check your config')
-	health.info(vim.inspect(require('dirvish-dovish').config))
+	health.info(vim.inspect(require('dirvish-do').config))
 end
 
 return M

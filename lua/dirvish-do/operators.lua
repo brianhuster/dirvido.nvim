@@ -3,7 +3,7 @@ local M = {}
 local fs = vim.fs
 local fn = vim.fn
 local uv = vim.uv or vim.loop
-local lsp = require('dirvish-dovish.lsp')
+local lsp = require('dirvish-do.lsp')
 
 M.sep = fn.exists('+shellslash') and not vim.o.shellslash and '\\' or '/'
 

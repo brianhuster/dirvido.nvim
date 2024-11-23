@@ -19,7 +19,7 @@ Then install with your favorite package manager:
 ```lua
 -- lazy.nvim
 {
-    'brianhuster/dirvish-dovish.nvim',
+    'brianhuster/dirvish-do.nvim',
     dependencies = {'justinmk/vim-dirvish'}
 }
 ```
@@ -27,10 +27,47 @@ Then install with your favorite package manager:
 ```vim
 " Vim-Plug
 Plug 'justinmk/vim-dirvish'
-Plug 'brianhuster/dirvish-dovish.nvim'
+Plug 'brianhuster/dirvish-do.nvim'
 ```
+# Configuration
 
-# Default mappings
+You can configure the keymaps to your liking. Here's an example:
+
+## In Lua
+
+```lua
+require('dirvish-do').setup(){
+	keymaps = {
+		make_file = 'mf',
+		make_dir = 'md',
+		copy = 'cp',
+		move = 'mv',
+		rename = 'r',
+		remove = '<Del>',
+	},
+})
+```
+## In Vimscript
+
+```vim
+v:lua.require'dirvish-do'.setup(#{
+    \ keymaps: {
+    \ make_file: 'mf',
+    \ make_dir: 'md',
+    \ copy: 'cp',
+    \ move: 'mv',
+    \ move: 'r',
+    \ remove: '<Del>',
+    \ },
+\ })
+```
+See `:h v:lua-call` for more information on calling Lua functions from legacy Vimscript.
+
+# Usage
+
+## Keymaps
+
+Below are the default keymaps. You can change them in the [configuration](#configuration)
 
 | Function                                | Default | Mode  |Tip to remember             |
 | --------------------------------------- | ------- | ----  |----------------------------|
@@ -46,39 +83,10 @@ For example, you can use `yy` to yank a file, then move to a new directory and u
 
 You can also use `y` in `visual line` mode to select many files to copy or move. (Note: `visual line` mode is recommended so that you can yank the full file path)
 
-# Configuration
+## Tips
 
-You can configure the keymaps to your liking. Here's an example:
-
-## In Lua
-
-```lua
-require('dirvish-dovish').setup(){
-	keymaps = {
-		make_file = 'mf',
-		make_dir = 'md',
-		copy = 'cp',
-		move = 'mv',
-		rename = 'r',
-		remove = '<Del>',
-	},
-})
-```
-## In Vimscript
-
-```vim
-v:lua.require'dirvish-dovish'.setup(#{
-    \ keymaps: {
-    \ make_file: 'mf',
-    \ make_dir: 'md',
-    \ copy: 'cp',
-    \ move: 'mv',
-    \ move: 'r',
-    \ remove: '<Del>',
-    \ },
-\ })
-```
-See `:h v:lua-call` for more information on calling Lua functions from legacy Vimscript.
+- Run `:h dirvish-do` to see the help file generated from this README
+- Use `:checkhealth dirvish-do` to check your keymaps and configuration
 
 # Credit
 
