@@ -6,8 +6,10 @@ Table of Contents                           *dirvish-dovish-table-of-contents*
 1. Introduction                                  |dirvish-dovish-introduction|
 2. Features                                          |dirvish-dovish-features|
 3. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
-4. Mappings                                          |dirvish-dovish-mappings|
+4. Default mappings                          |dirvish-dovish-default-mappings|
 5. Configuration                                |dirvish-dovish-configuration|
+  - In Lua                               |dirvish-dovish-configuration-in-lua|
+  - In Vimscript                   |dirvish-dovish-configuration-in-vimscript|
 6. Credit                                              |dirvish-dovish-credit|
 
 ==============================================================================
@@ -50,30 +52,25 @@ Then install with your favorite package manager:
 
 
 ==============================================================================
-4. Mappings                                          *dirvish-dovish-mappings*
+4. Default mappings                          *dirvish-dovish-default-mappings*
 
-  -----------------------------------------------------------------------------------------------
-  Function                 Default   Key                               Mode     Tip to remember
-  ------------------------ --------- --------------------------------- -------- -----------------
-  Create file              mf        <Plug>(dovish_create_file)        Normal   mf for “make
-                                                                                file”
+  --------------------------------------------------------------------------------
+  Function                            Default   Mode     Tip to remember
+  ----------------------------------- --------- -------- -------------------------
+  Create file                         mf        Normal   mf for “make file”
 
-  Create directory         md        <Plug>(dovish_create_directory)   Normal   md for “make
-                                                                                directory”
+  Create directory                    md        Normal   md for “make directory”
 
-  Delete under cursor      <Del>     <Plug>(dovish_nremove)            Normal   Just delete key
+  Delete under cursor                 <Del>     Normal   Just delete key
 
-  Delete items in visual   <Del>     <Plug>(dovish_vremove)            Visual   Just delete key
-  selection                                                                     
+  Delete items in visual selection    <Del>     Visual   Just delete key
 
-  Rename under cursor      r         <Plug>(dovish_rename)             Normal   r for “rename”
+  Rename under cursor                 r         Normal   r for “rename”
 
-  Copy file to current     cp        <Plug>(dovish_copy)               Normal   cp for “copy”
-  directory                                                                     
+  Copy file to current directory      cp        Normal   cp for “copy”
 
-  Move file to current     mv        <Plug>(dovish_move)               Normal   mv for “move”
-  directory                                                                     
-  -----------------------------------------------------------------------------------------------
+  Move file to current directory      mv        Normal   mv for “move”
+  --------------------------------------------------------------------------------
 For example, you can use `yy` to yank a file, then move to a new directory and
 use `p` to paste the file there. Or to move a file, you use `yy` to yank the
 file, move to a new directory and use `mv` to move the file there.
@@ -86,45 +83,42 @@ file path)
 ==============================================================================
 5. Configuration                                *dirvish-dovish-configuration*
 
+You can configure the keymaps to your liking. Here’s an example:
+
+
+IN LUA                                   *dirvish-dovish-configuration-in-lua*
+
 >lua
-    -- init.lua
-    require('dirvish-dovish').setup({
-       disable_default_keymaps = false -- Set to true to disable default keymaps
+    require('dirvish-dovish').setup(){
+        keymaps = {
+            make_file = 'mf',
+            make_dir = 'md',
+            copy = 'cp',
+            move = 'mv',
+            rename = 'r',
+            remove = '<Del>',
+        },
     })
 <
 
+
+IN VIMSCRIPT                       *dirvish-dovish-configuration-in-vimscript*
+
 >vim
-    " init.vim
-    v:lua.require'dirvish-dovish'.setup({
-       \ 'disable_default_keymaps' : v:false " Set to true to disable default keymaps
+    v:lua.require'dirvish-dovish'.setup(#{
+        \ keymaps: {
+        \ make_file: 'mf',
+        \ make_dir: 'md',
+        \ copy: 'cp',
+        \ move: 'mv',
+        \ move: 'r',
+        \ remove: '<Del>',
+        \ },
     \ })
 <
 
-To set your keymaps, create file `dirvish.lua` or `dirvish.vim` in your
-`ftplugin` directory of your config
-
->vim
-    :call chdir(stdpath('config'))
-    :call mkdir('ftplugin')
-    :e ftplugin/dirvish.lua " or ftplugin/dirvish.vim
-<
-
-You can also use `nnoremap`, `vnoremap`, `vim.api.nvim_set_keymap`,
-`vim.keymap.set` to set your own mappings.
-
-For example, to set your own mappings in `dirvish.lua`:
-
->lua
-    vim.keymap.set('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true, remap = true })
-    -- or
-    vim.api.nvim_set_keymap('n', 'p', '<Plug>(dovish_copy)', { buffer = true, silent = true })
-<
-
-or in `dirvish.vim`:
-
->vim
-    nnoremap <buffer><silent> p <Plug>(dovish_copy)
-<
+See |v:lua-call| for more information on calling Lua functions from legacy
+Vimscript.
 
 
 ==============================================================================
