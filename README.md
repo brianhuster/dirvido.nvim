@@ -52,12 +52,12 @@ require('dirvish-do').setup(){
 ```vim
 v:lua.require'dirvish-do'.setup(#{
     \ keymaps: {
-    \ make_file: 'mf',
-    \ make_dir: 'md',
-    \ copy: 'cp',
-    \ move: 'mv',
-    \ move: 'r',
-    \ remove: '<Del>',
+        \ make_file: 'mf',
+        \ make_dir: 'md',
+        \ copy: 'cp',
+        \ move: 'mv',
+        \ move: 'r',
+        \ remove: '<Del>',
     \ },
 \ })
 ```
@@ -85,7 +85,7 @@ You can also use `y` in `visual line` mode to select many files to copy or move.
 
 ## Tips
 
-- Run `:h dirvish-do` to see the help file generated from this README
+- See `:h dirvish-do` for the vimdoc file generated from README.md
 - Use `:checkhealth dirvish-do` to check your keymaps and configuration
 
 # Credit
