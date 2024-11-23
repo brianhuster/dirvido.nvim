@@ -7,6 +7,7 @@
 - Cross-platform support thanks to [luv](https://github.com/luvit/luv)
 - Easy to memorize [mappings](#mappings) 
 - Integration with LSP for renaming files,...
+- Small (~300 lines of code). When combined with [dirvish.vim](https://github.com/justinmk/vim-dirvish), it's just ~900 lines of code
 
 # Installation & Requirements
 
@@ -61,7 +62,7 @@ v:lua.require'dirvish-do'.setup(#{
     \ },
 \ })
 ```
-See `:h v:lua-call` for more information on calling Lua functions from legacy Vimscript.
+See `:h v:lua-call` for more information on calling Lua functions in legacy Vimscript.
 
 # Usage
 
