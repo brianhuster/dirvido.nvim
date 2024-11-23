@@ -6,10 +6,12 @@ Table of Contents                           *dirvish-dovish-table-of-contents*
 1. Introduction                                  |dirvish-dovish-introduction|
 2. Features                                          |dirvish-dovish-features|
 3. Installation & Requirements    |dirvish-dovish-installation-&-requirements|
-4. Default mappings                          |dirvish-dovish-default-mappings|
-5. Configuration                                |dirvish-dovish-configuration|
+4. Configuration                                |dirvish-dovish-configuration|
   - In Lua                               |dirvish-dovish-configuration-in-lua|
   - In Vimscript                   |dirvish-dovish-configuration-in-vimscript|
+5. Usage                                                |dirvish-dovish-usage|
+  - Keymaps                                     |dirvish-dovish-usage-keymaps|
+  - Tips                                           |dirvish-dovish-usage-tips|
 6. Credit                                              |dirvish-dovish-credit|
 
 ==============================================================================
@@ -39,7 +41,7 @@ Then install with your favorite package manager:
 >lua
     -- lazy.nvim
     {
-        'brianhuster/dirvish-dovish.nvim',
+        'brianhuster/dirvish-do.nvim',
         dependencies = {'justinmk/vim-dirvish'}
     }
 <
@@ -47,12 +49,59 @@ Then install with your favorite package manager:
 >vim
     " Vim-Plug
     Plug 'justinmk/vim-dirvish'
-    Plug 'brianhuster/dirvish-dovish.nvim'
+    Plug 'brianhuster/dirvish-do.nvim'
 <
 
 
 ==============================================================================
-4. Default mappings                          *dirvish-dovish-default-mappings*
+4. Configuration                                *dirvish-dovish-configuration*
+
+You can configure the keymaps to your liking. Here’s an example:
+
+
+IN LUA                                   *dirvish-dovish-configuration-in-lua*
+
+>lua
+    require('dirvish-do').setup(){
+        keymaps = {
+            make_file = 'mf',
+            make_dir = 'md',
+            copy = 'cp',
+            move = 'mv',
+            rename = 'r',
+            remove = '<Del>',
+        },
+    })
+<
+
+
+IN VIMSCRIPT                       *dirvish-dovish-configuration-in-vimscript*
+
+>vim
+    v:lua.require'dirvish-do'.setup(#{
+        \ keymaps: {
+        \ make_file: 'mf',
+        \ make_dir: 'md',
+        \ copy: 'cp',
+        \ move: 'mv',
+        \ move: 'r',
+        \ remove: '<Del>',
+        \ },
+    \ })
+<
+
+See |v:lua-call| for more information on calling Lua functions from legacy
+Vimscript.
+
+
+==============================================================================
+5. Usage                                                *dirvish-dovish-usage*
+
+
+KEYMAPS                                         *dirvish-dovish-usage-keymaps*
+
+Below are the default keymaps. You can change them in the
+|dirvish-dovish-configuration|
 
   --------------------------------------------------------------------------------
   Function                            Default   Mode     Tip to remember
@@ -80,45 +129,10 @@ move. (Note: `visual line` mode is recommended so that you can yank the full
 file path)
 
 
-==============================================================================
-5. Configuration                                *dirvish-dovish-configuration*
+TIPS                                               *dirvish-dovish-usage-tips*
 
-You can configure the keymaps to your liking. Here’s an example:
-
-
-IN LUA                                   *dirvish-dovish-configuration-in-lua*
-
->lua
-    require('dirvish-dovish').setup(){
-        keymaps = {
-            make_file = 'mf',
-            make_dir = 'md',
-            copy = 'cp',
-            move = 'mv',
-            rename = 'r',
-            remove = '<Del>',
-        },
-    })
-<
-
-
-IN VIMSCRIPT                       *dirvish-dovish-configuration-in-vimscript*
-
->vim
-    v:lua.require'dirvish-dovish'.setup(#{
-        \ keymaps: {
-        \ make_file: 'mf',
-        \ make_dir: 'md',
-        \ copy: 'cp',
-        \ move: 'mv',
-        \ move: 'r',
-        \ remove: '<Del>',
-        \ },
-    \ })
-<
-
-See |v:lua-call| for more information on calling Lua functions from legacy
-Vimscript.
+- Run |dirvish-do| to see the help file generated from this README
+- Use `:checkhealth dirvish-do` to check your keymaps and configuration
 
 
 ==============================================================================
