@@ -37,7 +37,7 @@ You can configure the keymaps to your liking. Here's an example:
 ## In Lua
 
 ```lua
-require('dirvish-do').setup(){
+require('dirvish-do').setup({
 	keymaps = {
 		make_file = 'mf',
 		make_dir = 'md',
@@ -48,21 +48,16 @@ require('dirvish-do').setup(){
 	},
 })
 ```
+
 ## In Vimscript
 
 ```vim
-v:lua.require'dirvish-do'.setup(#{
-    \ keymaps: {
-        \ make_file: 'mf',
-        \ make_dir: 'md',
-        \ copy: 'cp',
-        \ move: 'mv',
-        \ move: 'r',
-        \ remove: '<Del>',
-    \ },
-\ })
+v:lua.require'dirvish-do'.setup(
+    \ " Config dictionary goes here
+\ )
 ```
-See `:h v:lua-call` for more information on calling Lua functions in legacy Vimscript.
+
+See `:h v:lua-call` for information on calling Lua functions in legacy Vimscript.
 
 # Usage
 
