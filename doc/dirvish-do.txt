@@ -8,7 +8,7 @@ Table of Contents                               *dirvish-do-table-of-contents*
 3. Installation & Requirements        |dirvish-do-installation-&-requirements|
 4. Configuration                                    |dirvish-do-configuration|
   - In Lua                                   |dirvish-do-configuration-in-lua|
-  - In Vimscript                       |dirvish-do-configuration-in-vimscript|
+  - In legacy Vimscript         |dirvish-do-configuration-in-legacy-vimscript|
 5. Usage                                                    |dirvish-do-usage|
   - Keymaps                                         |dirvish-do-usage-keymaps|
   - Tips                                               |dirvish-do-usage-tips|
@@ -76,7 +76,7 @@ IN LUA                                       *dirvish-do-configuration-in-lua*
 <
 
 
-IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
+IN LEGACY VIMSCRIPT             *dirvish-do-configuration-in-legacy-vimscript*
 
 >vim
     v:lua.require'dirvish-do'.setup(
@@ -84,7 +84,8 @@ IN VIMSCRIPT                           *dirvish-do-configuration-in-vimscript*
     \ )
 <
 
-See |v:lua-call| for information on calling Lua functions in legacy Vimscript.
+See |v:lua-callSee| for information on calling Lua functions in legacy
+Vimscript.
 
 
 ==============================================================================
