@@ -10,6 +10,7 @@
   "fzf-lua": { "branch": "main", "commit": "a3f66ca0b9787129b13cc6bb491bb20476ba2da9" },
   "gitsigns.nvim": { "branch": "main", "commit": "5f808b5e4fef30bd8aca1b803b4e555da07fc412" },
   "lazy.nvim": { "branch": "main", "commit": "56ead98e05bb37a4ec28930a54d836d033cf00f2" },
+  "lazyclip": { "branch": "main", "commit": "5b54a82893bd9f219f69189b80413d3312d9d9dd" },
   "lazydev.nvim": { "branch": "main", "commit": "d5800897d9180cea800023f2429bce0a94ed6064" },
   "live-preview.nvim": { "branch": "dev", "commit": "3521bfbb8a9ccf9c367549ce35c52bfb5ccb5d19" },
   "luvit-meta": { "branch": "main", "commit": "57d464c4acb5c2e66bd4145060f5dc9e96a7bbb7" },
