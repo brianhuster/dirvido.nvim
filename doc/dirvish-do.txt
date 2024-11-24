@@ -84,8 +84,8 @@ IN LEGACY VIMSCRIPT             *dirvish-do-configuration-in-legacy-vimscript*
     \ )
 <
 
-See |v:lua-callSee| for information on calling Lua functions in legacy
-Vimscript.
+See :h v:lua-call for more information on calling Lua functions in legacy
+Vimscript.` for information on calling Lua functions in legacy Vimscript.
 
 
 ==============================================================================
