@@ -57,7 +57,7 @@ v:lua.require'dirvish-do'.setup(
 \ )
 ```
 
-See `:h v:lua-callSee :h v:lua-call for more information on calling Lua functions in legacy Vimscript.` for information on calling Lua functions in legacy Vimscript.
+See :h v:lua-call for more information on calling Lua functions in legacy Vimscript.` for information on calling Lua functions in legacy Vimscript.
 
 # Usage
 
